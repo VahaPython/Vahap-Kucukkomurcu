@@ -8,71 +8,102 @@
 </head>
 <body>
   <header>
-    <div class="container">
-      <h1>Vahap Kucukkomurcu</h1>
+    <div class="nav-container">
+      <div class="logo">Vahap Kucukkomurcu</div>
       <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+        <a href="#about" class="nav-link active">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <!-- Home / About Me -->
-    <section id="about" class="container">
-      <div class="about-flex">
-        <div class="about-text">
-          <h2>About Me</h2>
-          <p>
-            <!-- Short intro -->
-            Hi! I’m <strong>Vahap Kucukkomurcu</strong>, a Bioengineering student at Abdullah Gül University.
-            I’m passionate about bioinformatics, exploring how data science and biology intersect to solve real-world problems. I enjoy working on interdisciplinary projects that combine technology, programming, and life sciences.
-
-            With a strong interest in genetics, computational biology, and health technology, I’m constantly looking for ways to innovate and make a positive impact in the field. I thrive in collaborative environments and love learning new tools and methods to expand my skill set.
-
-            Outside of academics, I enjoy staying updated on the latest developments in biotechnology and artificial intelligence. I believe in lifelong learning and am always excited to take on new challenges.  
-            <!-- Add a little more about your background, goals, or what makes you unique. -->
-          </p>
-          <div class="social-links">
-            <a href="https://instagram.com/vkkomurcu9" target="_blank">Instagram</a>
-            <a href="https://linkedin.com/in/vahapkucukkomurcu" target="_blank">LinkedIn</a>
-            <a href="https://github.com/VahaPython" target="_blank">GitHub</a>
-          </div>
-        </div>
-        <div class="about-photo">
-          <!-- Add your photo later: -->
+  <main id="main-content">
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+      <div class="section-card">
+        <div class="profile-photo">
           <img src="assets/profile.jpg" alt="Vahap Kucukkomurcu" />
         </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" class="container">
-      <h2>Projects</h2>
-      <div class="projects-list">
-        <!-- Example project, copy & edit as needed -->
-        <div class="project-card">
-          <h3>C.Elegans Strain Ortholog Browser</h3>
-          <p>This project provides an easy way to browse genes from C. elegans strains and their human orthologs.</p>
-          <a href="https://vahapython.github.io/C.elegans-Strain-Ortholog-Browser-Static/#" target="_blank">View on GitHub</a>
+        <div class="about-text">
+          <h1>Hi, I'm Vahap Kucukkomurcu</h1>
+          <h2>Bioengineering Student @ Abdullah Gül University</h2>
+          <p>
+            I’m passionate about <strong>bioinformatics</strong>, exploring how data science and biology intersect to solve real-world problems. I enjoy working on interdisciplinary projects that combine technology, programming, and life sciences.<br><br>
+            With a strong interest in genetics, computational biology, and health technology, I’m constantly looking for ways to innovate and make a positive impact. I thrive in collaborative environments and love learning new tools and methods to expand my skill set.<br><br>
+            Outside of academics, I enjoy staying updated on the latest developments in biotechnology and artificial intelligence. I believe in lifelong learning and am always excited to take on new challenges.
+          </p>
+          <div class="social-links">
+            <a href="https://instagram.com/vkkomurcu9" target="_blank" aria-label="Instagram">
+              <img src="assets/instagram.svg" alt="Instagram" />
+            </a>
+            <a href="https://linkedin.com/in/vahapkucukkomurcu" target="_blank" aria-label="LinkedIn">
+              <img src="assets/linkedin.svg" alt="LinkedIn" />
+            </a>
+            <a href="https://github.com/VahaPython" target="_blank" aria-label="GitHub">
+              <img src="assets/github.svg" alt="GitHub" />
+            </a>
+          </div>
         </div>
-        <!-- Add more project cards as needed -->
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="container">
-      <h2>Contact</h2>
-      <p>Feel free to reach out via email:</p>
-      <p><a href="mailto:vahapkucukkomurcu@gmail.com">vahapkucukkomurcu@gmail.com</a></p>
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+      <div class="section-card">
+        <h2>Projects</h2>
+        <div class="projects-list">
+          <div class="project-card">
+            <h3>C.Elegans Strain Ortholog Browser</h3>
+            <p>This project provides an easy way to browse genes from C. elegans strains and their human orthologs.</p>
+            <a href="https://vahapython.github.io/C.elegans-Strain-Ortholog-Browser-Static/#" target="_blank">View Project</a>
+          </div>
+          <!-- Add more project cards as needed -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+      <div class="section-card">
+        <h2>Contact</h2>
+        <p>Feel free to reach out via email:</p>
+        <a class="email-link" href="mailto:vahapkucukkomurcu@gmail.com">vahapkucukkomurcu@gmail.com</a>
+      </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">
+    <div class="footer-container">
       <p>© 2025 Vahap Kucukkomurcu. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    // Smooth nav highlight on scroll
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 70;
+        if (window.scrollY >= sectionTop) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if(link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
