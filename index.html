@@ -7,9 +7,27 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Animated parallax background container -->
+  <div class="bg-parallax"></div>
+
   <header>
     <div class="nav-container">
-      <div class="logo">Vahap Kucukkomurcu</div>
+      <div class="logo">
+        <span class="logo-glow">
+          <!-- Animated waving hand emoji & bioinformatics icon -->
+          <span class="wave-emoji">👋</span>
+          Vahap Kucukkomurcu
+          <span class="bioinfo-icon" title="Bioinformatics">
+            <!-- Simple animated DNA SVG icon -->
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <ellipse cx="14" cy="14" rx="12" ry="12" stroke="#4061c0" stroke-width="2"/>
+              <path d="M8,8 Q14,14 20,20" stroke="#58b0fa" stroke-width="2" fill="none">
+                <animate attributeName="d" values="M8,8 Q14,14 20,20;M8,20 Q14,14 20,8;M8,8 Q14,14 20,20" dur="2s" repeatCount="indefinite"/>
+              </path>
+            </svg>
+          </span>
+        </span>
+      </div>
       <nav>
         <a href="#about" class="nav-link active">About</a>
         <a href="#projects" class="nav-link">Projects</a>
@@ -26,7 +44,10 @@
           <img src="assets/profile.jpg" alt="Vahap Kucukkomurcu" />
         </div>
         <div class="about-text">
-          <h1>Hi, I'm Vahap Kucukkomurcu</h1>
+          <h1>
+            Hi, I'm Vahap Kucukkomurcu
+            <span class="wave-emoji">👋</span>
+          </h1>
           <h2>Bioengineering Student @ Abdullah Gül University</h2>
           <p>
             I’m passionate about <strong>bioinformatics</strong>, exploring how data science and biology intersect to solve real-world problems. I enjoy working on interdisciplinary projects that combine technology, programming, and life sciences.<br><br>
@@ -54,7 +75,10 @@
         <h2>Projects</h2>
         <div class="projects-list">
           <div class="project-card">
-            <h3>C.Elegans Strain Ortholog Browser</h3>
+            <h3>
+              <span class="project-icon">🧬</span>
+              C.Elegans Strain Ortholog Browser
+            </h3>
             <p>This project provides an easy way to browse genes from C. elegans strains and their human orthologs.</p>
             <a href="https://vahapython.github.io/C.elegans-Strain-Ortholog-Browser-Static/#" target="_blank">View Project</a>
           </div>
@@ -76,34 +100,11 @@
   <footer>
     <div class="footer-container">
       <p>© 2025 Vahap Kucukkomurcu. All rights reserved.</p>
+      <!-- Scroll to top button -->
+      <button id="scrollToTopBtn" title="Back to Top">↑</button>
     </div>
   </footer>
 
-  <script>
-    // Smooth nav highlight on scroll
-    const sections = document.querySelectorAll('.section');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 70;
-        if (window.scrollY >= sectionTop) current = section.getAttribute('id');
-      });
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if(link.getAttribute('href') === '#' + current) link.classList.add('active');
-      });
-    });
-
-    // Smooth scroll for nav links
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
