@@ -264,6 +264,39 @@ function initHeader() {
 }
 
 /* ══════════════════════════════════
+   HERO — scroll-expanding media
+══════════════════════════════════ */
+function initHeroExpand() {
+  const scrim = document.getElementById('heroScrim');
+
+  const isMobile = () => window.innerWidth < 768;
+  const fadeTargets = document.querySelectorAll('.hero-bio, .hero-stats, .hero-cta, .social-strip');
+  const firstWord = document.querySelector('.h-first');
+  const lastWord  = document.querySelector('.h-last');
+
+  ScrollTrigger.create({
+    trigger: '.s-hero',
+    start: 'top top',
+    end: () => '+=' + (isMobile() ? 550 : 1000),
+    pin: true,
+    scrub: 0.6,
+    invalidateOnRefresh: true,
+    onUpdate: self => {
+      const p = self.progress;
+
+      if (typeof window.setHeroDNAProgress === 'function') {
+        window.setHeroDNAProgress(p);
+      }
+      if (scrim) scrim.style.opacity = String(Math.min(p * 0.95, 0.7));
+
+      gsap.set(fadeTargets, { opacity: 1 - p * 0.9, y: -p * 16 });
+      if (firstWord) gsap.set(firstWord, { x: -p * 40 });
+      if (lastWord)  gsap.set(lastWord,  { x:  p * 40 });
+    }
+  });
+}
+
+/* ══════════════════════════════════
    NAV PILL — sliding hover indicator
 ══════════════════════════════════ */
 function initNavPill() {
@@ -337,6 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCursor();
   initMagnetic();
   initHeader();
+  initHeroExpand();
   initNavPill();
   initPinLinks();
   initSmooth();
