@@ -168,9 +168,9 @@ function initReveal() {
         start: 'top 88%',
         toggleActions: 'play none none none'
       },
-      opacity: 1, y: 0,
-      duration: 0.72,
-      ease: 'power2.out',
+      opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
+      duration: 0.9,
+      ease: 'power3.out',
       delay: (i % 5) * 0.065
     });
   });
@@ -264,6 +264,61 @@ function initHeader() {
 }
 
 /* ══════════════════════════════════
+   NAV PILL — sliding hover indicator
+══════════════════════════════════ */
+function initNavPill() {
+  const nav  = document.getElementById('nav');
+  const pill = document.getElementById('navPill');
+  if (!nav || !pill) return;
+
+  const links = [...nav.querySelectorAll('.nav-link')];
+
+  function moveTo(link) {
+    if (!link) { pill.style.opacity = '0'; return; }
+    const navRect  = nav.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    pill.style.width     = linkRect.width + 'px';
+    pill.style.transform = `translateX(${linkRect.left - navRect.left}px)`;
+    pill.style.opacity   = '1';
+  }
+
+  links.forEach(link => {
+    link.addEventListener('mouseenter', () => moveTo(link));
+  });
+
+  nav.addEventListener('mouseleave', () => {
+    moveTo(nav.querySelector('.nav-link.active'));
+  });
+
+  /* keep pill synced with active link as scroll position changes */
+  const sync = new MutationObserver(() => {
+    if (!nav.matches(':hover')) moveTo(nav.querySelector('.nav-link.active'));
+  });
+  links.forEach(l => sync.observe(l, { attributes: true, attributeFilter: ['class'] }));
+
+  window.addEventListener('resize', () => {
+    moveTo(nav.querySelector('.nav-link.active') || links[0]);
+  });
+}
+
+/* ══════════════════════════════════
+   PROJECT LINK PIN BEACONS
+══════════════════════════════════ */
+function initPinLinks() {
+  document.querySelectorAll('.pj-link').forEach(link => {
+    const beacon = document.createElement('span');
+    beacon.className = 'pj-pin-beacon';
+    beacon.setAttribute('aria-hidden', 'true');
+    beacon.innerHTML =
+      '<span class="pj-pin-ring"></span>' +
+      '<span class="pj-pin-ring"></span>' +
+      '<span class="pj-pin-ring"></span>' +
+      '<span class="pj-pin-dot"></span>';
+    link.appendChild(beacon);
+  });
+}
+
+/* ══════════════════════════════════
    SMOOTH SCROLL
 ══════════════════════════════════ */
 function initSmooth() {
@@ -282,6 +337,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCursor();
   initMagnetic();
   initHeader();
+  initNavPill();
+  initPinLinks();
   initSmooth();
   initTilt();
   initReveal();
