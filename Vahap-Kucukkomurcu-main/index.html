@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vahap Kucukkomurcu — Biomedical Engineer</title>
+  <meta name="description" content="Biomedical Engineering student specializing in bioinformatics, computational biology, and data-driven life science research.">
+
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+  <meta name="theme-color" content="#222f30">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/dna-hero.jpg" fetchpriority="high">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Motion libraries are deferred; the first screen renders without waiting for them. -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script defer src="ai.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- HEADER -->
+  <header id="header">
+    <div class="nav-wrap">
+      <a href="#hero" class="logo">VK<span class="logo-dot">.</span></a>
+      <nav id="nav">
+        <span class="nav-pill" id="navPill" aria-hidden="true"></span>
+        <a class="nav-link" href="#about" data-s="about">About</a>
+        <a class="nav-link" href="#skills" data-s="skills">Skills</a>
+        <a class="nav-link" href="#projects" data-s="projects">Projects</a>
+        <a class="nav-link" href="#contact" data-s="contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="s-hero">
+      <div class="hero-dna" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="hero-wrap">
+        <div class="hero-badge"><span class="badge-pulse"></span>Available for Research Collaboration</div>
+        <div class="hero-names">
+          <h1 class="h-first glitch" data-text="Vahap">Vahap</h1>
+          <h1 class="h-last glitch hl-text" data-text="Kucukkomurcu">Kucukkomurcu</h1>
+        </div>
+        <div class="hero-role">
+          <span class="role-gt">&gt;&nbsp;</span>
+          <span>Bioinformatics Researcher</span>
+        </div>
+        <p class="hero-bio">
+          Biomedical Engineering student at <span class="hl">Abdullah Gül University</span>,
+          building computational tools at the intersection of data science and life sciences.
+        </p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="sv" data-to="4">0</span>
+            <span class="sl">Projects</span>
+          </div>
+          <div class="sdiv"></div>
+          <div class="hero-stat">
+            <span class="sv" data-to="10">0</span>
+            <span class="sl">Tools & Languages</span>
+          </div>
+          <div class="sdiv"></div>
+          <div class="hero-stat">
+            <span class="sv" data-to="3">0</span>
+            <span class="sl">Research Domains</span>
+          </div>
+        </div>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary magnetic">View Projects
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-ghost magnetic">Get In Touch</a>
+        </div>
+        <div class="social-strip">
+          <a href="https://github.com/VahaPython" target="_blank" rel="noopener" class="soc-btn" aria-label="GitHub"><img src="assets/github.svg" width="18" height="18" alt=""></a>
+          <a href="https://linkedin.com/in/vahapkucukkomurcu" target="_blank" rel="noopener" class="soc-btn" aria-label="LinkedIn"><img src="assets/linkedin.svg" width="18" height="18" alt=""></a>
+          <a href="https://instagram.com/vkkomurcu9" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram"><img src="assets/instagram.svg" width="18" height="18" alt=""></a>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <div class="sh-line"></div>
+        <span class="sh-label">SCROLL TO EXPAND</span>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="s-about">
+      <div class="container">
+        <div class="eyebrow reveal">// 01. ABOUT</div>
+        <div class="about-grid">
+          <div class="about-left">
+            <h2 class="sec-title reveal">Code meets <span class="hl">cells</span>.<br>Data meets <span class="hl">disease</span>.</h2>
+            <p class="about-p reveal">I'm a biomedical engineering student passionate about applying computational methods to biological complexity. My work spans virtual drug screening, signal processing, evolutionary optimization, and bioinformatics tool development.</p>
+            <p class="about-p reveal">I believe the future of medicine lives at the intersection of algorithms and biology — and I'm building toward that future, one pipeline at a time.</p>
+            <div class="meta-grid reveal">
+              <div class="meta-item"><span class="mk">UNIVERSITY</span><span class="mv">Abdullah Gül University</span></div>
+              <div class="meta-item"><span class="mk">DEPARTMENT</span><span class="mv">Biomedical Engineering</span></div>
+              <div class="meta-item"><span class="mk">FOCUS</span><span class="mv">Bioinformatics & Comp. Biology</span></div>
+              <div class="meta-item"><span class="mk">LOCATION</span><span class="mv">Kayseri, Turkey</span></div>
+            </div>
+          </div>
+          <div class="about-right reveal">
+            <div class="terminal-card">
+              <div class="term-bar"><span></span><span></span><span></span></div>
+              <div class="term-body">
+                <div class="tl"><span class="tc">$</span> <span class="tt">whoami</span></div>
+                <div class="tl"><span class="to">vahap.kucukkomurcu</span></div>
+                <div class="tl tg"><span class="tc">$</span> <span class="tt">cat research.log</span></div>
+                <div class="tl"><span class="to">► virtual_drug_screening</span></div>
+                <div class="tl"><span class="to">► ecg_signal_processing</span></div>
+                <div class="tl"><span class="to">► ml_manufacturing_opt</span></div>
+                <div class="tl"><span class="to">► genomics_tooling</span></div>
+                <div class="tl tg"><span class="tc">$</span> <span class="tt">status</span></div>
+                <div class="tl"><span class="to">[ ACTIVE ] Open to collaborations</span></div>
+                <div class="tl tg"><span class="tc">$</span> <span class="tbl">█</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="s-skills">
+      <div class="container">
+        <div class="eyebrow reveal">// 02. SKILLS</div>
+        <h2 class="sec-title reveal">Technical <span class="hl">Arsenal</span></h2>
+        <p class="sec-sub reveal">Technologies at the intersection of biology and computation.</p>
+        <div class="skill-filters reveal">
+          <button class="sf-btn active" data-cat="all">All</button>
+          <button class="sf-btn" data-cat="prog">Programming</button>
+          <button class="sf-btn" data-cat="bio">Bioinformatics</button>
+          <button class="sf-btn" data-cat="eng">Engineering</button>
+          <button class="sf-btn" data-cat="ml">ML &amp; Data</button>
+        </div>
+        <div class="skills-grid" id="skillsGrid">
+          <div class="skill-card tilt reveal" data-cat="prog" data-skill="Python" data-ctx="BioPython, pandas, matplotlib, scikit-learn — data pipelines, bioinformatics analysis, genetic algorithm implementation"><div class="sk-icon">🐍</div><div class="sk-name">Python</div><div class="sk-tag">Programming</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+          <div class="skill-card tilt reveal" data-cat="prog" data-skill="MATLAB" data-ctx="Neural network training, optimization algorithms, signal processing, Taguchi ANOVA analysis"><div class="sk-icon">〽️</div><div class="sk-name">MATLAB</div><div class="sk-tag">Programming</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+          <div class="skill-card tilt reveal" data-cat="prog" data-skill="JavaScript" data-ctx="Web-based bioinformatics tools, interactive gene browsers, static site deployment via GitHub Pages"><div class="sk-icon">⚡</div><div class="sk-name">JavaScript</div><div class="sk-tag">Programming</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+          <div class="skill-card tilt reveal" data-cat="bio" data-skill="AutoDock Vina" data-ctx="Molecular docking simulations, binding affinity scoring, batch virtual screening of natural compound libraries against DPP-4 enzyme target"><div class="sk-icon">🔬</div><div class="sk-name">AutoDock Vina</div><div class="sk-tag">Bioinformatics</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+          <div class="skill-card tilt reveal" data-cat="bio" data-skill="UCSF Chimera" data-ctx="Molecular visualization, receptor preparation for docking — hydrogen addition, charge assignment, active site grid definition"><div class="sk-icon">🧬</div><div class="sk-name">UCSF Chimera</div><div class="sk-tag">Bioinformatics</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+          <div class="skill-card tilt reveal" data-cat="bio" data-skill="BIOVIA Discovery Studio" data-ctx="2D/3D protein-ligand interaction analysis, hydrogen bond mapping, hydrophobic contact visualization, pharmacophore exploration"><div class="sk-icon">💊</div><div class="sk-name">BIOVIA Discovery Studio</div><div class="sk-tag">Bioinformatics</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+          <div class="skill-card tilt reveal" data-cat="bio" data-skill="BioPython" data-ctx="Genomic data parsing, gene ortholog mapping, sequence analysis for C.elegans strain browser"><div class="sk-icon">🧫</div><div class="sk-name">BioPython</div><div class="sk-tag">Bioinformatics</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+          <div class="skill-card tilt reveal" data-cat="eng" data-skill="LTspice" data-ctx="Analog circuit simulation — ECG instrumentation amplifier using TL082 op-amps, Sallen-Key bandpass filter, noise and frequency response analysis"><div class="sk-icon">⚙️</div><div class="sk-name">LTspice</div><div class="sk-tag">Engineering</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+          <div class="skill-card tilt reveal" data-cat="eng" data-skill="FDM 3D Printing" data-ctx="PLA parameter optimization, surface quality engineering, layer adhesion — applied in Taguchi DOE study for manufacturing research"><div class="sk-icon">🖨️</div><div class="sk-name">FDM 3D Printing</div><div class="sk-tag">Engineering</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+          <div class="skill-card tilt reveal" data-cat="ml" data-skill="Artificial Neural Networks" data-ctx="Feedforward ANN as surrogate model for FDM process parameter prediction — trained on Taguchi L27 experimental data, interfaced with genetic algorithm"><div class="sk-icon">🧠</div><div class="sk-name">Neural Networks</div><div class="sk-tag">ML &amp; Data</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+          <div class="skill-card tilt reveal" data-cat="ml" data-skill="Genetic Algorithm" data-ctx="Evolutionary optimization using selection, crossover and mutation operators — interfaced with ANN fitness function for manufacturing parameter search space exploration"><div class="sk-icon">🔀</div><div class="sk-name">Genetic Algorithm</div><div class="sk-tag">ML &amp; Data</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+          <div class="skill-card tilt reveal" data-cat="ml" data-skill="Taguchi DOE" data-ctx="L27 orthogonal array experimental design, S/N ratio analysis, ANOVA for identifying optimal process parameters in PLA FDM 3D printing"><div class="sk-icon">📊</div><div class="sk-name">Taguchi / DOE</div><div class="sk-tag">ML &amp; Data</div><div class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div><button class="sk-ai">Ask AI ✦</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="s-projects">
+      <div class="container">
+        <div class="eyebrow reveal">// 03. PROJECTS</div>
+        <h2 class="sec-title reveal">Featured <span class="hl">Work</span></h2>
+        <p class="sec-sub reveal">Research and engineering across drug discovery, signal processing, and AI-driven optimization.</p>
+        <div class="projects-grid">
+          <div class="project-card tilt reveal" data-proj="C.Elegans Strain Ortholog Browser" data-tech="JavaScript, BioPython, HTML/CSS, GitHub Pages" data-desc="An interactive web application for browsing C. elegans strain-specific genes and mapping them to human orthologs. Built for comparative genomics researchers with a clean, database-linked interface. Deployed as a static site on GitHub Pages.">
+            <div class="pj-top"><span class="pj-num">01</span><div class="pj-tags"><span class="ptag">Bioinformatics</span><span class="ptag">Web App</span></div></div>
+            <h3 class="pj-title">C.Elegans Ortholog Browser</h3>
+            <p class="pj-desc">Interactive web app for browsing C. elegans strain genes and their human orthologs. Supports comparative genomics with intuitive, database-linked exploration.</p>
+            <div class="pj-stack"><span class="tech">JavaScript</span><span class="tech">BioPython</span><span class="tech">HTML/CSS</span><span class="tech">GitHub Pages</span></div>
+            <div class="pj-footer">
+              <a href="https://vahapython.github.io/C.elegans-Strain-Ortholog-Browser-Static/#" target="_blank" rel="noopener" class="pj-link"><img src="assets/external-link.svg" width="14" alt=""> Live</a>
+              <a href="https://github.com/VahaPython" target="_blank" rel="noopener" class="pj-link"><img src="assets/github.svg" width="14" alt=""> GitHub</a>
+              <button class="pj-ai">AI Deep Dive ✦</button>
+            </div>
+          </div>
+          <div class="project-card tilt reveal" data-proj="ECG Analog Front-End Circuit" data-tech="TL082 Op-Amp, LTspice, Analog Electronics, Oscilloscope" data-desc="Designed and physically built a complete ECG analog front-end circuit using TL082 op-amps. Implemented a 3-op-amp instrumentation amplifier for differential bio-signal acquisition, an active Sallen-Key bandpass filter (0.5-150 Hz), and a right-leg drive circuit for common-mode rejection. Validated with both LTspice simulation and real oscilloscope measurements.">
+            <div class="pj-top"><span class="pj-num">02</span><div class="pj-tags"><span class="ptag">Electronics</span><span class="ptag">Signal Processing</span></div></div>
+            <h3 class="pj-title">ECG Analog Front-End Circuit</h3>
+            <p class="pj-desc">Complete ECG acquisition circuit using TL082 op-amps — instrumentation amplifier, Sallen-Key bandpass filter, right-leg drive. Lab-built and validated with LTspice + oscilloscope.</p>
+            <div class="pj-stack"><span class="tech">TL082 Op-Amp</span><span class="tech">LTspice</span><span class="tech">Oscilloscope</span><span class="tech">Analog Design</span></div>
+            <div class="pj-footer">
+              <a href="https://github.com/VahaPython" target="_blank" rel="noopener" class="pj-link"><img src="assets/github.svg" width="14" alt=""> GitHub</a>
+              <button class="pj-ai">AI Deep Dive ✦</button>
+            </div>
+          </div>
+          <div class="project-card tilt reveal" data-proj="DPP-4 Inhibitor Virtual Screening" data-tech="AutoDock Vina, UCSF Chimera, BIOVIA Discovery Studio, SANC Database" data-desc="Virtual screening of natural compounds from the SANC phytochemical database against the DPP-4 enzyme for type 2 diabetes treatment. Full pipeline: receptor preparation in UCSF Chimera, batch docking via AutoDock Vina, interaction analysis in BIOVIA Discovery Studio. Top compounds ranked by binding affinity (kcal/mol).">
+            <div class="pj-top"><span class="pj-num">03</span><div class="pj-tags"><span class="ptag">Drug Discovery</span><span class="ptag">Bioinformatics</span></div></div>
+            <h3 class="pj-title">DPP-4 Inhibitor Virtual Screening</h3>
+            <p class="pj-desc">Virtual screening of the SANC natural compound library against DPP-4 for type 2 diabetes. Full docking pipeline — receptor prep, Vina screening, 2D/3D interaction analysis in BIOVIA DS.</p>
+            <div class="pj-stack"><span class="tech">AutoDock Vina</span><span class="tech">UCSF Chimera</span><span class="tech">BIOVIA DS</span><span class="tech">SANC DB</span></div>
+            <div class="pj-footer">
+              <a href="https://github.com/VahaPython" target="_blank" rel="noopener" class="pj-link"><img src="assets/github.svg" width="14" alt=""> GitHub</a>
+              <button class="pj-ai">AI Deep Dive ✦</button>
+            </div>
+          </div>
+          <div class="project-card tilt reveal" data-proj="GA-ANN FDM 3D Print Optimizer" data-tech="Python, MATLAB, Genetic Algorithm, Artificial Neural Network, Taguchi L27" data-desc="Hybrid Genetic Algorithm + ANN pipeline for optimizing FDM 3D printing parameters for PLA parts. Used Taguchi L27 orthogonal array for experimental design, trained an ANN surrogate model, then deployed GA to search for optimal surface roughness and tensile strength. Implemented in both Python and MATLAB with full ANOVA analysis.">
+            <div class="pj-top"><span class="pj-num">04</span><div class="pj-tags"><span class="ptag">ML / AI</span><span class="ptag">Manufacturing</span></div></div>
+            <h3 class="pj-title">GA-ANN FDM Print Optimizer</h3>
+            <p class="pj-desc">Hybrid GA + ANN pipeline for PLA 3D printing optimization. Taguchi L27 design, ANN surrogate model, GA-driven parameter search — minimizing surface roughness, maximizing tensile strength.</p>
+            <div class="pj-stack"><span class="tech">Python</span><span class="tech">MATLAB</span><span class="tech">Genetic Algorithm</span><span class="tech">ANN</span><span class="tech">Taguchi L27</span></div>
+            <div class="pj-footer">
+              <a href="https://github.com/VahaPython" target="_blank" rel="noopener" class="pj-link"><img src="assets/github.svg" width="14" alt=""> GitHub</a>
+              <button class="pj-ai">AI Deep Dive ✦</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="s-contact">
+      <div class="container">
+        <div class="eyebrow reveal">// 04. CONTACT</div>
+        <h2 class="sec-title reveal">Let's <span class="hl">Connect</span></h2>
+        <p class="sec-sub reveal">Open to research collaborations, bioinformatics discussions, and new opportunities.</p>
+        <div class="contact-grid">
+          <div class="contact-links reveal">
+            <a href="mailto:vahapkucukkomurcu@gmail.com" class="ct-item"><span class="ct-ico">📧</span><div><div class="ctk">EMAIL</div><div class="ctv">vahapkucukkomurcu@gmail.com</div></div></a>
+            <a href="https://linkedin.com/in/vahapkucukkomurcu" target="_blank" rel="noopener" class="ct-item"><span class="ct-ico">💼</span><div><div class="ctk">LINKEDIN</div><div class="ctv">vahapkucukkomurcu</div></div></a>
+            <a href="https://github.com/VahaPython" target="_blank" rel="noopener" class="ct-item"><span class="ct-ico">🐙</span><div><div class="ctk">GITHUB</div><div class="ctv">VahaPython</div></div></a>
+            <a href="https://instagram.com/vkkomurcu9" target="_blank" rel="noopener" class="ct-item"><span class="ct-ico">📷</span><div><div class="ctk">INSTAGRAM</div><div class="ctv">@vkkomurcu9</div></div></a>
+          </div>
+          <div class="contact-term reveal">
+            <div class="terminal-card">
+              <div class="term-bar"><span></span><span></span><span></span></div>
+              <div class="term-body">
+                <div class="tl"><span class="tc">$</span> <span class="tt">connect --to vahap</span></div>
+                <div class="tl"><span class="to">Establishing connection...</span></div>
+                <div class="tl"><span class="to">Connection ready. ✓</span></div>
+                <div class="tl tg"><span class="tc">$</span> <span class="tt">send_message</span></div>
+              </div>
+            </div>
+            <a href="mailto:vahapkucukkomurcu@gmail.com" class="btn btn-primary btn-block magnetic">
+              Send a Message
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <span>© 2025 Vahap Kucukkomurcu</span>
+      <span class="foot-sep">—</span>
+      <span>Biomedical Engineering · AGU</span>
+    </div>
+  </footer>
+
+  <!-- AI MODAL -->
+  <div class="ai-modal" id="aiModal" role="dialog" aria-modal="true">
+    <div class="ai-overlay" id="aiOverlay"></div>
+    <div class="ai-panel">
+      <div class="ai-head">
+        <div class="ai-title"><span class="ai-star">✦</span><span>AI Analysis</span><span class="ai-demo-tag" id="aiDemoTag">DEMO</span></div>
+        <button class="ai-close" id="aiClose" aria-label="Close">✕</button>
+      </div>
+      <div class="ai-subject" id="aiSubject"></div>
+      <div class="ai-body" id="aiBody">
+        <div class="ai-loading" id="aiLoading">
+          <div class="ai-dots"><span></span><span></span><span></span></div>
+          <span>Generating analysis...</span>
+        </div>
+        <div class="ai-result" id="aiResult"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
