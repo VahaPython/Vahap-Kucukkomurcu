@@ -3,14 +3,19 @@
   if (typeof THREE === 'undefined') return;
 
   const canvas   = document.getElementById('bg-canvas');
+  if (!canvas) return;
+  const compactScreen = window.matchMedia('(max-width: 767px)').matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const scene    = new THREE.Scene();
   scene.fog      = new THREE.FogExp2(0x020c18, 0.014);
 
   const camera   = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 600);
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' });
 
   renderer.setSize(innerWidth, innerHeight);
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  /* A capped render scale prevents a full-screen background from becoming the
+     most expensive part of the page on high-density displays. */
+  renderer.setPixelRatio(Math.min(devicePixelRatio, compactScreen ? 1.2 : 1.5));
   renderer.setClearColor(0x000000, 0);
   if ('outputEncoding' in renderer) renderer.outputEncoding = THREE.sRGBEncoding;
   if ('toneMapping' in renderer) {
@@ -72,7 +77,7 @@
   });
 
   /* ── Ambient particle field ── */
-  const PCOUNT = 260;
+  const PCOUNT = compactScreen ? 90 : 160;
   const pPos  = new Float32Array(PCOUNT * 3);
   const pOrig = new Float32Array(PCOUNT * 3);
   for (let i = 0; i < PCOUNT; i++) {
@@ -95,7 +100,7 @@
 
   /* ── Faint neural connection lines (depth texture) ── */
   const conPts = [];
-  for (let i = 0; i < 46; i++) {
+  for (let i = 0; i < (compactScreen ? 18 : 30); i++) {
     const x1 = (Math.random() - 0.5) * 60, y1 = (Math.random() - 0.5) * 40, z1 = (Math.random() - 0.5) * 30 - 10;
     conPts.push(new THREE.Vector3(x1, y1, z1),
                 new THREE.Vector3(x1 + (Math.random()-0.5)*14, y1 + (Math.random()-0.5)*9, z1));
@@ -110,10 +115,10 @@
   /* ── DNA Double Helix — smooth glowing glass tubes ── */
   const dnaGroup = new THREE.Group();
 
-  const N_PTS   = 140;
+  const N_PTS   = 112;
   const N_TURNS = 5;
-  const RADIUS  = 2.6;
-  const HEIGHT  = 24;
+  const RADIUS  = 3.15;
+  const HEIGHT  = 26;
   const COL_A   = 0x00ff9c;   // strand 1
   const COL_B   = 0x22a6ff;   // strand 2
 
@@ -130,7 +135,7 @@
     const group = new THREE.Group();
 
     /* soft outer halo (glow) */
-    const haloGeo = new THREE.TubeGeometry(curve, 220, 0.16, 8, false);
+    const haloGeo = new THREE.TubeGeometry(curve, 160, 0.18, 6, false);
     const haloMat = new THREE.MeshBasicMaterial({
       color, transparent: true, opacity: 0.10,
       blending: THREE.AdditiveBlending, depthWrite: false
@@ -138,7 +143,7 @@
     group.add(new THREE.Mesh(haloGeo, haloMat));
 
     /* bright core with animated flowing pulse */
-    const coreGeo = new THREE.TubeGeometry(curve, 220, 0.045, 8, false);
+    const coreGeo = new THREE.TubeGeometry(curve, 160, 0.052, 6, false);
     const flowTex = makeFlowTexture(`#${color.toString(16).padStart(6, '0')}`);
     const coreMat = new THREE.MeshBasicMaterial({
       color, map: flowTex, transparent: true, opacity: 0.95,
@@ -207,7 +212,9 @@
   });
   dnaGroup.add(new THREE.Mesh(glowGeo, glowMat));
 
-  dnaGroup.position.set(9, 0, -5);
+  /* Make the DNA a clear hero focal point, without competing with the copy. */
+  dnaGroup.position.set(compactScreen ? 4.4 : 8.2, 0, -5);
+  dnaGroup.scale.setScalar(compactScreen ? 0.88 : 1.16);
   scene.add(dnaGroup);
 
   /* ── Hero scroll-expand hook ──
@@ -219,15 +226,24 @@
     heroProgress = Math.max(0, Math.min(1, p));
   };
   const baseCamZ   = camera.position.z;    // 22
-  const baseGroupX = dnaGroup.position.x;  // 9
-  let dnaScale = 1;
+  const baseGroupX = dnaGroup.position.x;
+  const baseScale = compactScreen ? 0.88 : 1.16;
+  let dnaScale = baseScale;
 
   /* ── Clock ── */
   const clock = new THREE.Clock();
 
   /* ── Animate ── */
-  (function animate() {
-    requestAnimationFrame(animate);
+  let animationFrame;
+  let isRendering = true;
+  let previousFrame = 0;
+  const targetFrameTime = compactScreen ? 1000 / 30 : 1000 / 50;
+
+  function animate(now) {
+    if (!isRendering) return;
+    animationFrame = requestAnimationFrame(animate);
+    if (now - previousFrame < targetFrameTime) return;
+    previousFrame = now;
     const t = clock.getElapsedTime();
 
     /* Smooth mouse */
@@ -235,18 +251,22 @@
     mouse.y += (tMouse.y - mouse.y) * 0.04;
 
     /* Rotate DNA slowly */
-    dnaGroup.rotation.y = t * 0.17;
-    dnaGroup.position.y = Math.sin(t * 0.28) * 0.6;
+    if (!reducedMotion) {
+      dnaGroup.rotation.y = t * 0.17;
+      dnaGroup.position.y = Math.sin(t * 0.28) * 0.6;
+    }
 
     /* Flowing data-pulse along each strand */
-    strand1.flowTex.offset.y = -(t * 0.16) % 1;
-    strand2.flowTex.offset.y = -(t * 0.16 + 0.4) % 1;
+    if (!reducedMotion) {
+      strand1.flowTex.offset.y = -(t * 0.16) % 1;
+      strand2.flowTex.offset.y = -(t * 0.16 + 0.4) % 1;
+    }
 
     /* Hero scroll-expand: zoom in, recenter, grow and glow more as the
        user scrolls through the hero section */
     const targetCamZ   = baseCamZ - heroProgress * 12.5;
     const targetGroupX = baseGroupX - heroProgress * baseGroupX;
-    const targetScale  = 1 + heroProgress * 0.85;
+    const targetScale  = baseScale + heroProgress * (compactScreen ? 0.55 : 0.95);
     const targetGlow   = 0.028 + heroProgress * 0.16;
 
     camera.position.z   += (targetCamZ   - camera.position.z)   * 0.07;
@@ -255,12 +275,14 @@
     dnaGroup.scale.setScalar(dnaScale);
     glowMat.opacity     += (targetGlow   - glowMat.opacity)     * 0.07;
 
-    /* Gently float particles */
-    const pos = particles.geometry.attributes.position.array;
-    for (let i = 0; i < PCOUNT; i++) {
-      pos[i*3+1] = pOrig[i*3+1] + Math.sin(t * 0.22 + i * 0.013) * 0.75;
+    /* Gently float particles. Skip buffer uploads for reduced-motion users. */
+    if (!reducedMotion) {
+      const pos = particles.geometry.attributes.position.array;
+      for (let i = 0; i < PCOUNT; i++) {
+        pos[i*3+1] = pOrig[i*3+1] + Math.sin(t * 0.22 + i * 0.013) * 0.75;
+      }
+      particles.geometry.attributes.position.needsUpdate = true;
     }
-    particles.geometry.attributes.position.needsUpdate = true;
 
     /* Camera parallax */
     camera.position.x += (mouse.x * 2.5 - camera.position.x) * 0.025;
@@ -268,12 +290,25 @@
     camera.lookAt(0, 0, 0);
 
     renderer.render(scene, camera);
-  })();
+  }
+  animationFrame = requestAnimationFrame(animate);
 
   /* ── Resize ── */
   window.addEventListener('resize', () => {
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 768 ? 1.2 : 1.5));
+  });
+
+  /* Avoid rendering when there is nothing to display. */
+  document.addEventListener('visibilitychange', () => {
+    isRendering = !document.hidden;
+    if (isRendering) {
+      previousFrame = 0;
+      animationFrame = requestAnimationFrame(animate);
+    } else {
+      cancelAnimationFrame(animationFrame);
+    }
   });
 })();

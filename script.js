@@ -1,114 +1,8 @@
-/* script.js — Interactions, GSAP, Custom Cursor, Animations */
+/* script.js — Interactions, GSAP, and animations */
 'use strict';
 
 /* ── Register GSAP plugins ── */
 gsap.registerPlugin(ScrollTrigger);
-
-/* ══════════════════════════════════
-   LOADER
-══════════════════════════════════ */
-function initLoader() {
-  const loader = document.getElementById('loader');
-  const fill   = document.getElementById('loaderFill');
-  let pct = 0;
-
-  const iv = setInterval(() => {
-    pct += Math.random() * 11 + 2;
-    if (pct >= 100) {
-      pct = 100;
-      clearInterval(iv);
-      fill.style.width = '100%';
-      setTimeout(dismissLoader, 350);
-    }
-    fill.style.width = Math.min(pct, 100) + '%';
-  }, 70);
-
-  function dismissLoader() {
-    gsap.to(loader, {
-      opacity: 0, duration: 0.55, ease: 'power2.out',
-      onComplete: () => {
-        loader.style.display = 'none';
-        runHeroEntrance();
-      }
-    });
-  }
-}
-
-/* ══════════════════════════════════
-   HERO ENTRANCE
-══════════════════════════════════ */
-function runHeroEntrance() {
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-  tl.fromTo('.hero-badge',  { opacity:0, y:18 }, { opacity:1, y:0, duration:0.6 })
-    .fromTo('.h-first',     { opacity:0, y:30 }, { opacity:1, y:0, duration:0.7 }, '-=0.2')
-    .fromTo('.h-last',      { opacity:0, y:30 }, { opacity:1, y:0, duration:0.7 }, '-=0.45')
-    .fromTo('.hero-role',   { opacity:0, y:20 }, { opacity:1, y:0, duration:0.5 }, '-=0.25')
-    .fromTo('.hero-bio',    { opacity:0, y:20 }, { opacity:1, y:0, duration:0.5 }, '-=0.25')
-    .fromTo('.hero-stats',  { opacity:0, y:18 }, { opacity:1, y:0, duration:0.5 }, '-=0.2')
-    .fromTo('.hero-cta',    { opacity:0, y:16 }, { opacity:1, y:0, duration:0.5 }, '-=0.2')
-    .fromTo('.social-strip',{ opacity:0, y:14 }, { opacity:1, y:0, duration:0.4 }, '-=0.2')
-    .fromTo('.scroll-hint', { opacity:0 },       { opacity:1, duration:0.6 },      '-=0.1');
-
-  /* Start typewriter after entrance */
-  tl.call(startTypewriter, null, '+=0.3');
-}
-
-/* ══════════════════════════════════
-   TYPEWRITER
-══════════════════════════════════ */
-function startTypewriter() {
-  const el = document.getElementById('typeTarget');
-  if (!el) return;
-
-  const strings = [
-    'Bioinformatics Researcher',
-    'Computational Biologist',
-    'Data Science \u00d7 Life Sciences',
-    'Code \u2192 Cures',
-    'Biomedical Engineering Student'
-  ];
-
-  let si = 0, ci = 0, del = false;
-
-  function tick() {
-    const s = strings[si];
-    if (!del) {
-      el.textContent = s.substring(0, ++ci);
-      if (ci === s.length) { del = true; setTimeout(tick, 1900); return; }
-    } else {
-      el.textContent = s.substring(0, --ci);
-      if (ci === 0) { del = false; si = (si + 1) % strings.length; }
-    }
-    setTimeout(tick, del ? 42 : 72);
-  }
-  tick();
-}
-
-/* ══════════════════════════════════
-   CUSTOM CURSOR
-══════════════════════════════════ */
-function initCursor() {
-  const dot  = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  if (!dot || !ring) return;
-
-  let rx = -100, ry = -100;
-
-  window.addEventListener('mousemove', e => {
-    /* Dot follows instantly */
-    dot.style.left = e.clientX + 'px';
-    dot.style.top  = e.clientY + 'px';
-    /* Ring lags behind (CSS transition handles it) */
-    ring.style.left = e.clientX + 'px';
-    ring.style.top  = e.clientY + 'px';
-  });
-
-  document.querySelectorAll('a, button, .skill-card, .project-card').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
-  });
-}
 
 /* ══════════════════════════════════
    MAGNETIC BUTTONS
@@ -364,10 +258,23 @@ function initSmooth() {
 }
 
 /* ══════════════════════════════════
+   HERO ATMOSPHERE — preserve battery when this tab is not visible
+══════════════════════════════════ */
+function initHeroAtmosphere() {
+  const dna = document.querySelector('.hero-dna');
+  if (!dna) return;
+
+  function syncMotion() {
+    dna.classList.toggle('motion-paused', document.hidden);
+  }
+  document.addEventListener('visibilitychange', syncMotion);
+  syncMotion();
+}
+
+/* ══════════════════════════════════
    BOOT
 ══════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  initCursor();
   initMagnetic();
   initHeader();
   initHeroExpand();
@@ -378,5 +285,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initCounters();
   initSkillFilter();
-  initLoader();   /* Loader triggers hero entrance after dismiss */
+  initHeroAtmosphere();
 });
